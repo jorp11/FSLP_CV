@@ -1,20 +1,21 @@
 #include "Arduino.h"
 #include "fslp.h"
 #include "GPIO.h"
-fslp::fslp(int fslpSenseLine, int fslpDriveLine1, 
-          int fslpDriveLine2,int fslpBotR0,int muxSel)
-          {
-            _fslpSenseLine = fslpSenseLine;
-            _fslpDriveLine1 = fslpDriveLine1;
-            _fslpDriveLine2 = fslpDriveLine2;
-            _fslpBotR0 = fslpBotR0;
-            _muxSel = muxSel & 0x3; // 0-3. drives multiplexer select line.
-          }
-int fslp::pressureRead(){
+
+fslp::fslp(int fslpSenseLine, int fslpDriveLine1,
+           int fslpDriveLine2, int fslpBotR0, int muxSel)
+{
+  _fslpSenseLine = fslpSenseLine;
+  _fslpDriveLine1 = fslpDriveLine1;
+  _fslpDriveLine2 = fslpDriveLine2;
+  _fslpBotR0 = fslpBotR0;
+  _muxSel = muxSel & 0x3; // 0-3. drives multiplexer select line.
+}
+uint16_t fslp::pressureRead() {
   //int pressure;
   //TODO replace with port write?
-  digitalWrite(MUX_SEL_B_PIN,_muxSel >> 1 );
-  digitalWrite(MUX_SEL_A_PIN,_muxSel & 0x1 );
+  digitalWrite(MUX_SEL_B_PIN, _muxSel >> 1 );
+  digitalWrite(MUX_SEL_A_PIN, _muxSel & 0x1 );
   //Serial.print("mux line: ");
   //Serial.println(_muxSel);
   clearLine();
@@ -30,12 +31,12 @@ int fslp::pressureRead(){
   if (v1 == v2)
   {
     // Avoid dividing by zero, and return maximum reading.
-    return 2<<12-1;//4*64 * 1023;
+    return 2 << 12 - 1; //4*64 * 1023;
   }
-  return 12*64 * v2 / (v1 - v2);
-  }
+  return 12 * 64 * v2 / (v1 - v2);
+}
 
- int fslp::positionRead()
+uint16_t fslp::positionRead()
 {
   // Step 1 - Clear the charge on the sensor.
   pinMode(_fslpSenseLine, OUTPUT);
@@ -63,7 +64,7 @@ int fslp::pressureRead(){
 }
 void fslp::clearLine()
 {
-    pinMode(_fslpDriveLine1, OUTPUT);
+  pinMode(_fslpDriveLine1, OUTPUT);
   digitalWrite(_fslpDriveLine1, HIGH);
 
   pinMode(_fslpBotR0, OUTPUT);
@@ -74,5 +75,11 @@ void fslp::clearLine()
   pinMode(_fslpDriveLine2, INPUT);
 
 }
+fslp_data_t fslp::getData() {
+  fslp_data_t fslpData;
+  fslpData.pressure = pressureRead();
+  fslpData.pos = positionRead();
+  return fslpData;
+};
 
 

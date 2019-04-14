@@ -14,10 +14,12 @@ class buttons {
     return _button_state[index] == 0x7f;
   }
   
-  inline bool just_pressed(uint8_t index) const {
+  inline bool justPressed(uint8_t index) const {
     return _button_state[index] == 0x80;
   }
-
+  inline bool justReleased(uint8_t index) const {
+    return _button_state[index] == 0x01;
+  }
   inline bool pressed(uint8_t index) const {
     return _button_state[index] == 0x00;
   }

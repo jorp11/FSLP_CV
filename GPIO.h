@@ -8,8 +8,8 @@
 #define FSLP2_MUXSEL 0x01
 #define MUX_SEL_A_PIN 19///Multiplexer selectline A 
 #define MUX_SEL_B_PIN 2//Multiplexer selectline B 
-#define LATCH_BUTTON_PIN 34
-#define LOOP_BUTTON_PIN 32
+#define LATCH_BUTTON_PIN 32
+#define LOOP_BUTTON_PIN 33
 #define FSLP1_LED_PIN 4
 #define FSLP2_LED_PIN 0
 #define DAC_CS_PIN 5

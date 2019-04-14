@@ -9,22 +9,27 @@ enum FSLP_CHANNEL {
   FSLP_CHANNEL_3,
   FSLP_CHANNEL_4
 };
-
+struct fslp_data_t {
+  uint16_t pressure;
+  uint16_t pos;
+};
 class fslp {
   public:
     fslp(int fslpSenseLine, int fslpDriveLine1,
          int fslpDriveLine2, int fslpBotR0, int muxSel);
     ~fslp() {};
-    int pressureRead();
-    int positionRead();
-    
+
+    fslp_data_t getData(); // Returns Pressure and Position for FSLP
   private:
-      void clearLine();
+    void clearLine();
+    uint16_t pressureRead();
+    uint16_t positionRead();
     int _fslpSenseLine;
     int _fslpDriveLine1;
     int _fslpDriveLine2;
     int _fslpBotR0;
     int _muxSel;
+    fslp_data_t _FSLP_state [8]; // Stores last 8 readings
 
 };
 #endif

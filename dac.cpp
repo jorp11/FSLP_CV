@@ -11,7 +11,7 @@ dac::dac() {
   SPI.begin();
   SPI.beginTransaction(SPISettings(1000000, MSBFIRST, SPI_MODE2));
 }
-void dac::dacWrite(uint16_t value, DAC_CHANNEL_t channel) {
+void inline dac::dacWriteChannel(uint16_t value, DAC_CHANNEL_t channel) {
   uint8_t _DACout[3];
   digitalWrite(DAC_CS_PIN, LOW);
   switch (channel) {
@@ -38,6 +38,12 @@ void dac::dacWrite(uint16_t value, DAC_CHANNEL_t channel) {
   SPI.transfer(_DACout[1]);
   SPI.transfer(_DACout[2]);
   digitalWrite(DAC_CS_PIN, HIGH);
+}
+void  dac::dacWriteChannels(uint16_t valueA, uint16_t valueB,uint16_t valueC,uint16_t valueD   ){
+  dacWriteChannel(valueA, DAC_CHANNEL_A);
+  dacWriteChannel(valueB, DAC_CHANNEL_B);
+  dacWriteChannel(valueC, DAC_CHANNEL_C);
+  dacWriteChannel(valueD, DAC_CHANNEL_D);
 }
 
 

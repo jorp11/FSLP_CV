@@ -12,7 +12,8 @@ class dac {
   public:
     dac();
     ~dac() {};
-    void dacWrite(uint16_t data, DAC_CHANNEL_t channel);
+    void dacWriteChannel(uint16_t value, DAC_CHANNEL_t channel);
+    void dacWriteChannels(uint16_t valueA, uint16_t valueB,uint16_t valueC,uint16_t valueD   );
 
   private:
 
