@@ -8,7 +8,8 @@ enum UI_MODE {
   UI_MODE_NORM,
   UI_MODE_LOOP_REC,
   UI_MODE_LOOP_PLAY,
-  UI_MODE_LATCH
+  UI_MODE_LATCH,
+  UI_MODE_LFO
 };
 class ui {
   public:

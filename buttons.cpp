@@ -4,7 +4,6 @@
 buttons::buttons() {
     pinMode(LOOP_BUTTON_PIN,INPUT_PULLUP);
     pinMode(LATCH_BUTTON_PIN,INPUT_PULLUP);
-
 }
 
 void buttons::debounce() {

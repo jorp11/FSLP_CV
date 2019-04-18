@@ -20,16 +20,19 @@ class fslp {
     ~fslp() {};
 
     fslp_data_t getData(); // Returns Pressure and Position for FSLP
+    
   private:
     void clearLine();
     uint16_t pressureRead();
     uint16_t positionRead();
+    
     int _fslpSenseLine;
     int _fslpDriveLine1;
     int _fslpDriveLine2;
     int _fslpBotR0;
     int _muxSel;
-    fslp_data_t _FSLP_state [8]; // Stores last 8 readings
+    uint8_t _state_count;
+    fslp_data_t _FSLP_state [4]; // Stores last 4 readings
 
 };
 #endif

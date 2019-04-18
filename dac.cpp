@@ -17,22 +17,16 @@ void inline dac::dacWriteChannel(uint16_t value, DAC_CHANNEL_t channel) {
   switch (channel) {
     case DAC_CHANNEL_A :  _DACout[0] = B00010000; //write to channel A
     break;
-    case DAC_CHANNEL_B :  _DACout[0] = B00010010; //writ to channel B
+    case DAC_CHANNEL_B :  _DACout[0] = B00010010; //write to channel B
     break;
-    case DAC_CHANNEL_C :  _DACout[0] = B00010100; //writ to channel C
+    case DAC_CHANNEL_C :  _DACout[0] = B00010100; //write to channel C
     break;
-    case DAC_CHANNEL_D :  _DACout[0] = B00010110; //writ to channel D
+    case DAC_CHANNEL_D :  _DACout[0] = B00010110; //write to channel D
     break;
     default: Serial.println("Oops!");
   }
   _DACout[1] = uint8_t(value >> 8);
   _DACout[2] = uint8_t(value);
-//  Serial.print(_DACout[0]);
-//  Serial.print(" ");
-//    Serial.print(_DACout[1]);
-//      Serial.print(" ");
-//
-//  Serial.println(_DACout[2]);
 
   SPI.transfer(_DACout[0]);
   SPI.transfer(_DACout[1]);
