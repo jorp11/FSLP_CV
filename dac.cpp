@@ -1,3 +1,4 @@
+//TI DAC8565 simple driver class. this could definitely be made more efficient.
 #include "dac.h"
 #include "Arduino.h"
 #include "GPIO.h"
